@@ -1,4 +1,4 @@
-resource "azurerm_virtual_network" "vnet_linux" {
+resource "azurerm_virtual_network" "vnet" {
     name = "${var.name}-${var.env}-vnet"
     resource_group_name = var.resource_group_name
     location = var.location
@@ -24,4 +24,8 @@ resource "azurerm_virtual_network" "vnet_linux" {
         product = var.name
         provisioner = "terraform"
     }
+}
+
+output "vnet" {
+    value = azurerm_virtual_network.vnet
 }

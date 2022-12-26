@@ -2,6 +2,8 @@
 
 This module will crate a landing zone to be used as a personal laboratory.
 
+Tutorial: 
+
 ### Required Fields
 
 - **name**: Laboratory name 
@@ -20,3 +22,11 @@ This module will crate a landing zone to be used as a personal laboratory.
 - resource_group_name - Resource Group Name
 - resource_group_id - Resource Group ID
 - resources_base_location - Resources Location
+
+### Examples
+```yaml
+module "landing_zone" {
+  source = "github.com/jarpsimoes/tf-modules/landing-zone-module"
+  name = "any-name"
+}
+```
