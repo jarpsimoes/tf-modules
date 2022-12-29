@@ -16,36 +16,29 @@ variable "service_cidr" {
 variable "dns_service_ip" {
   type = string
 }
-variable "required_tags" {
-  type = map(string)
+variable "docker_bridge_cidr" {
+  type = string
+  default = "172.17.0.1/16"
 }
-
 variable "default_node_pool" {
   type = object({
-    initial_node_count = number
-    max_nodes = number
-    min_nodes = number
     vm_size = string
     vnet_subnet_id = string
+    initial_node_count = number
+    min_nodes = number
+    max_nodes = number
   })
+}
+variable "required_tags" {
+  type = map(string)
 }
 variable "additional_node_pool" {
   type = list(object({
     name = string
     initial_node_count = number
-    max_nodes = number
     min_nodes = number
+    max_nodes = number
     vm_size = string
     vnet_subnet_id = string
-  }))
-}
-
-variable "helm" {
-  type = list(object({
-    values_file = string
-    name = string
-    repository = string
-    chart = string
-    create_namespace = bool
   }))
 }
