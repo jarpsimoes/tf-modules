@@ -55,7 +55,7 @@ data "azurerm_subnet" "subnet" {
 }
 module "aks" {
     
-    source = "../../../tf-modules/kubernetes-cluster"
+    source = "github.com/jarpsimoes/tf-modules/kubernetes-cluster"
 
     name = "test-aks"
     location = "West Europe"

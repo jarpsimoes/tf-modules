@@ -27,7 +27,7 @@ Tutorial:
 
 ```
 module "virtual_network" {
-  source = "../../tf-modules/virtual-network"
+  source = "github.com/jarpsimoes/tf-modules/virtual-network"
 
   name = "operator-net"
   resource_group_name = "operator-lab-rg"
