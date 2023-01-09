@@ -46,6 +46,50 @@ resource "azurerm_network_security_group" "vnet_nsg_shared" {
             source_port_ranges = null
         },
         {
+            access = "Allow"
+            description = "Allow Gateway networks connections"
+            destination_address_prefix = null
+            destination_address_prefixes = setunion( 
+                    var.dev_addr,
+                    var.prd_addr,
+                    var.shared_addr
+            )
+            destination_application_security_group_ids = null
+            destination_port_range = null
+            destination_port_ranges = ["3443", "6390"]
+            direction = "Inbound"
+            name = "i-subnet-network-apigtw-${var.env}"
+            priority = 120
+            protocol = "*"
+            source_address_prefix = "*"
+            source_address_prefixes = null
+            source_application_security_group_ids = null
+            source_port_range = "*"
+            source_port_ranges = null
+        },
+        {
+            access = "Allow"
+            description = "Allow HTTP and HTTPS connections from anywhere"
+            destination_address_prefix = null
+            destination_address_prefixes = setunion( 
+                    var.dev_addr,
+                    var.prd_addr,
+                    var.shared_addr
+            )
+            destination_application_security_group_ids = null
+            destination_port_range = null
+            destination_port_ranges = [ "80", "443" ]
+            direction = "Inbound"
+            name = "i-http-https-port-rule-${var.env}"
+            priority = 130
+            protocol = "Tcp"
+            source_address_prefix = "*"
+            source_address_prefixes = null
+            source_application_security_group_ids = null
+            source_port_range = "*"
+            source_port_ranges = null
+        },
+        {
             access = "Deny"
             description = "Deny connections"
             destination_address_prefix = null
