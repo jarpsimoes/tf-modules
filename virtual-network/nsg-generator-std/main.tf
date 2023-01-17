@@ -20,8 +20,8 @@ resource "azurerm_network_security_group" "vnet_nsg_linux" {
             source_address_prefix = "*"
             source_address_prefixes = null
             source_application_security_group_ids = null
-            source_port_range = null
-            source_port_ranges = [ "22" ]
+            source_port_range = "*"
+            source_port_ranges = null
         },
         {
             access = "Allow"
@@ -51,7 +51,7 @@ resource "azurerm_network_security_group" "vnet_nsg_linux" {
             destination_address_prefixes = [ var.linux_vm_addr ]
             destination_application_security_group_ids = null
             destination_port_range = null
-            destination_port_ranges = ["22", "80", "443", "3306", "5432"]
+            destination_port_ranges = ["80", "443", "3306", "5432"]
             direction = "Inbound"
             name = "i-subnets-network-trafic-${var.env}-linux"
             priority = 120
