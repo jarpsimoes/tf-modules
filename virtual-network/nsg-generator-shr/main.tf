@@ -20,8 +20,8 @@ resource "azurerm_network_security_group" "vnet_nsg_shared" {
             source_address_prefix = "*"
             source_address_prefixes = null
             source_application_security_group_ids = null
-            source_port_range = null
-            source_port_ranges = [ "3389", "22" ]
+            source_port_range = "*"
+            source_port_ranges = null
         },
         {
             access = "Allow"
