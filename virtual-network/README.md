@@ -1,53 +1,74 @@
-# Virtual Machine Linux Laboratory
+# Virtual Network Laboratory
 
 This module will create the following resources:
 
-- Virtual Machine
+- NSG Windows
+- NSG Linux
+- NSG K8S
+- VNET Development
+- VNET Production
+- VNET Shared
 
 Tutorial:
 
 ### Required Fields
 
-- **name**: Virtual Mahine name
+- **name**: Network structure name
 - **resource_group_name**: Resource group to host resources
 - **location**: Location to host resources
-- **network**: Network configurations:
-  _network.subnet_id: Subnet ID
-  _network.private_ip_address: Private IP Address when not Dynamic
-  _network.internal_address_allocation: Private IP Address allocation method (Dynamic or Static)
-  _network.public_ip: Public IP (true or false)
+- **subnets**: Network configurations:
+  
+  _subnets.[ENV].windows_vm_.addr: Address space
+  
+  _subnets.[ENV].linux_vm_.addr: Address space
+  
+  _subnets.[ENV].k8s_vm_.addr: Address space
+  
+  _subnets.shr.linux_vm_.addr: Address space
+  
+  _subnets.shr.winodws_vm_.addr: Address space
 
 ### Example
 
 ```
-module "vm" {
-    source = "github.com/jarpsimoes/tf-modules/tf-modules/virtual-machine-linux"
+module "virtual_network" {
+  source = "github.com/jarpsimoes/tf-modules/virtual-network"
 
-    name = "test-vm"
-    resource_group_name = "operator-lab-rg"
-    location = "West Europe"
+  name = "operator-net"
+  resource_group_name = "operator-lab-rg"
+  location = "West Europe"
 
-    environment = "dev"
-
-    vm_size = "Standard_b2s"
-
-    network = {
-        internal_address_allocation = "Dynamic"
-        private_ip_address = null
-        public_ip = true
-        subnet_id = data.azurerm_subnet.subnet.id
+  subnets = {
+    dev = {
+      k8s = {
+        addr = "10.1.0.0/16"
+      }
+      linux_vm = {
+        addr = "10.0.0.0/24"
+      }
+      windows_vm = {
+        addr = "10.0.1.0/24"
+      }
     }
-
-    image = {
-        publisher = "Canonical"
-        offer     = "UbuntuServer"
-        sku       = "16.04-LTS"
-        version   = "latest"
+    prd = {
+      k8s = {
+        addr = "10.3.0.0/16"
+      }
+      linux_vm = {
+        addr = "10.2.0.0/24"
+      }
+      windows_vm = {
+        addr = "10.2.1.0/24"
+      }
     }
-
-    authentication = {
-        admin_username = "admin_vm"
-        pub_key_path = "/Users/username/.ssh/id_rsa.pub"
+    shr = {
+      linux_vm = {
+        addr = "10.4.0.0/24"
+      }
+      windows_vm = {
+        addr = "10.4.1.0/24"
+      }
     }
+  }
 }
 ```
