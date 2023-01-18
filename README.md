@@ -10,4 +10,4 @@ This Terraform modules will be used as example to support tutorials.
 
 - [Kubernetes](https://github.com/jarpsimoes/tf-modules/blob/main/kubernetes-cluster/README.md): Create kubernetes cluster (AKS)
 
-- [Virtual Machine Linux](https://github.com/jarpsimoes/tf-modules/blob/main/virtual-machine-linux/README.md)
+- [Virtual Machine Linux](https://github.com/jarpsimoes/tf-modules/blob/main/virtual-machine-linux/README.md): Linux virtual machine
