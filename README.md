@@ -9,3 +9,5 @@ This Terraform modules will be used as example to support tutorials.
 - [Network](https://github.com/jarpsimoes/tf-modules/blob/main/virtual-network/README.md): Create network structure to support laboratory
 
 - [Kubernetes](https://github.com/jarpsimoes/tf-modules/blob/main/kubernetes-cluster/README.md): Create kubernetes cluster (AKS)
+
+- [Virtual Machine Linux](https://github.com/jarpsimoes/tf-modules/blob/main/virtual-machine-linux/README.md)
