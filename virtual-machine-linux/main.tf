@@ -7,11 +7,8 @@ module "vm_with_public_ip" {
     name = var.name
     location = var.location
     resource_group_name = var.resource_group_name
-    vm_size = var.vm_size
-    environment = var.environment
     network = var.network
-    image = var.image
-    authentication = var.authentication
+    
 }
 
 module "vm_without_public_ip" {
@@ -21,11 +18,8 @@ module "vm_without_public_ip" {
     name = var.name
     location = var.location
     resource_group_name = var.resource_group_name
-    vm_size = var.vm_size
-    environment = var.environment
     network = var.network
-    image = var.image
-    authentication = var.authentication
+
 }
 
 resource "azurerm_virtual_machine" "vm_machine" {

@@ -63,8 +63,8 @@ resource "azurerm_network_security_group" "vnet_nsg_linux" {
                     var.shared_addr 
                 ]
             source_application_security_group_ids = null
-            source_port_range = null
-            source_port_ranges = ["22", "80", "443", "3306", "5432"]
+            source_port_range = "*"
+            source_port_ranges = null
 
         },
         {
@@ -172,8 +172,8 @@ resource "azurerm_network_security_group" "vnet_nsg_windows" {
             source_address_prefix = "*"
             source_address_prefixes = null
             source_application_security_group_ids = null
-            source_port_range = null
-            source_port_ranges = [ "3389" ]
+            source_port_range = "*"
+            source_port_ranges = null
         },
         {
             access = "Allow"
@@ -215,8 +215,8 @@ resource "azurerm_network_security_group" "vnet_nsg_windows" {
                     var.shared_addr 
                 ]
             source_application_security_group_ids = null
-            source_port_range = null
-            source_port_ranges = ["3389", "80", "443", "3306", "5432"]
+            source_port_range = "*"
+            source_port_ranges = null
 
         },
         {
