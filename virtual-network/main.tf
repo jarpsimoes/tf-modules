@@ -85,10 +85,14 @@ module "vnet_shr" {
 }
 
 resource "azurerm_virtual_network_peering" "dev2share" {
+  depends_on = [
+    module.vnet_shr
+  ]
   name = "peer-dev2share"
   resource_group_name = var.resource_group_name
   virtual_network_name = module.vnet_dev.vnet.name
   remote_virtual_network_id = module.vnet_shr.vnet.id
+  allow_virtual_network_access = true
 }
 resource "azurerm_virtual_network_peering" "share2dev" {
   depends_on = [
@@ -98,6 +102,7 @@ resource "azurerm_virtual_network_peering" "share2dev" {
   resource_group_name = var.resource_group_name
   virtual_network_name = module.vnet_shr.vnet.name
   remote_virtual_network_id = module.vnet_dev.vnet.id
+  allow_virtual_network_access = true
 }
 resource "azurerm_virtual_network_peering" "prd2share" {
   depends_on = [
@@ -107,6 +112,7 @@ resource "azurerm_virtual_network_peering" "prd2share" {
   resource_group_name = var.resource_group_name
   virtual_network_name = module.vnet_prd.vnet.name
   remote_virtual_network_id = module.vnet_shr.vnet.id
+  allow_virtual_network_access = true
 }
 resource "azurerm_virtual_network_peering" "share2prd" {
   depends_on = [
@@ -116,4 +122,5 @@ resource "azurerm_virtual_network_peering" "share2prd" {
   resource_group_name = var.resource_group_name
   virtual_network_name = module.vnet_shr.vnet.name
   remote_virtual_network_id = module.vnet_prd.vnet.id
+  allow_virtual_network_access = true
 }
