@@ -89,7 +89,7 @@ resource "azurerm_virtual_network_peering" "dev2share" {
   virtual_network_name = module.vnet_dev.vnet.name
   remote_virtual_network_id = module.vnet_shr.vnet.id
 }
-resource "azurerm_virtual_network_peering" "dev2share" {
+resource "azurerm_virtual_network_peering" "share2dev" {
   name = "peer-share2share"
   resource_group_name = var.resource_group_name
   virtual_network_name = module.vnet_shr.vnet.name
