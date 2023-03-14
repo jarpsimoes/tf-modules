@@ -109,7 +109,7 @@ resource "azurerm_virtual_network_peering" "prd2share" {
   remote_virtual_network_id = module.vnet_shr.vnet.id
 }
 resource "azurerm_virtual_network_peering" "share2prd" {
-  deplends_on = [
+  depends_on = [
     azurerm_virtual_network_peering.prd2share
   ]
   name = "peer-share2prd"
