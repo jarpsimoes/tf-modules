@@ -83,3 +83,27 @@ module "vnet_shr" {
     linux_nsg_id = module.nsg_shared.shared_nsg.id
     windows_nsg_id = module.nsg_shared.shared_nsg.id
 }
+resource "azurerm_virtual_network_peering" "dev2share" {
+  name = "peer-dev2share"
+  resource_group_name = var.resource_group_name
+  virtual_network_name = module.vnet_dev.vnet.name
+  remote_virtual_network_id = module.vnet_shr.vnet.id
+}
+resource "azurerm_virtual_network_peering" "dev2share" {
+  name = "peer-share2share"
+  resource_group_name = var.resource_group_name
+  virtual_network_name = module.vnet_shr.vnet.name
+  remote_virtual_network_id = module.vnet_dev.vnet.id
+}
+resource "azurerm_virtual_network_peering" "prd2share" {
+  name = "peer-prd2share"
+  resource_group_name = var.resource_group_name
+  virtual_network_name = module.vnet_prd.vnet.name
+  remote_virtual_network_id = module.vnet_shr.vnet.id
+}
+resource "azurerm_virtual_network_peering" "share2prd" {
+  name = "peer-share2prd"
+  resource_group_name = var.resource_group_name
+  virtual_network_name = module.vnet_shr.vnet.name
+  remote_virtual_network_id = module.vnet_prd.vnet.id
+}
