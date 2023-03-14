@@ -8,8 +8,8 @@ resource "azurerm_network_security_group" "vnet_nsg_linux" {
         {
             access = "Allow"
             description = "Allow ssh connections from anywhere"
-            destination_address_prefix = null
-            destination_address_prefixes = [ var.linux_vm_addr ]
+            destination_address_prefix = "*"
+            destination_address_prefixes = null
             destination_application_security_group_ids = null
             destination_port_range = null
             destination_port_ranges = [ "22" ]
@@ -26,8 +26,8 @@ resource "azurerm_network_security_group" "vnet_nsg_linux" {
         {
             access = "Allow"
             description = "Allow subnet connections from subnet and shared"
-            destination_address_prefix = null
-            destination_address_prefixes = [ var.linux_vm_addr ]
+            destination_address_prefix = "*"
+            destination_address_prefixes = null
             destination_application_security_group_ids = null
             destination_port_range = "*"
             destination_port_ranges = null
@@ -47,8 +47,8 @@ resource "azurerm_network_security_group" "vnet_nsg_linux" {
         {
             access = "Allow"
             description = "Allow subnets connections on ports 22, 80, 443, 3306 and 5432"
-            destination_address_prefix = null
-            destination_address_prefixes = [ var.linux_vm_addr ]
+            destination_address_prefix = "*"
+            destination_address_prefixes = null
             destination_application_security_group_ids = null
             destination_port_range = null
             destination_port_ranges = ["80", "443", "3306", "5432"]
@@ -70,8 +70,8 @@ resource "azurerm_network_security_group" "vnet_nsg_linux" {
         {
             access = "Deny"
             description = "Deny connections"
-            destination_address_prefix = null
-            destination_address_prefixes = [ var.linux_vm_addr ]
+            destination_address_prefix = "*"
+            destination_address_prefixes = null
             destination_application_security_group_ids = null
             destination_port_range = "*"
             destination_port_ranges = null
@@ -95,7 +95,7 @@ resource "azurerm_network_security_group" "vnet_nsg_linux" {
             destination_address_prefixes = null
             destination_application_security_group_ids = null
             destination_port_range = null
-            destination_port_ranges = [ "443", "5000" ]
+            destination_port_ranges = [ "80", "443", "5000" ]
             direction = "Outbound"
             name = "o-allow-external-https-connections-${var.env}-linux"
             priority = 100

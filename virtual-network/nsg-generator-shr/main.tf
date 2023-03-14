@@ -8,8 +8,8 @@ resource "azurerm_network_security_group" "vnet_nsg_shared" {
         {
             access = "Allow"
             description = "Allow RDP and SSH connections from anywhere"
-            destination_address_prefix = null
-            destination_address_prefixes = var.shared_addr
+            destination_address_prefix = "*"
+            destination_address_prefixes = null
             destination_application_security_group_ids = null
             destination_port_range = null
             destination_port_ranges = [ "3389", "22" ]
@@ -26,8 +26,8 @@ resource "azurerm_network_security_group" "vnet_nsg_shared" {
         {
             access = "Allow"
             description = "Allow all networks connections"
-            destination_address_prefix = null
-            destination_address_prefixes = var.shared_addr
+            destination_address_prefix = "*"
+            destination_address_prefixes = null
             destination_application_security_group_ids = null
             destination_port_range = "*"
             destination_port_ranges = null
@@ -48,12 +48,8 @@ resource "azurerm_network_security_group" "vnet_nsg_shared" {
         {
             access = "Allow"
             description = "Allow Gateway networks connections"
-            destination_address_prefix = null
-            destination_address_prefixes = setunion( 
-                    var.dev_addr,
-                    var.prd_addr,
-                    var.shared_addr
-            )
+            destination_address_prefix = "*"
+            destination_address_prefixes = null
             destination_application_security_group_ids = null
             destination_port_range = null
             destination_port_ranges = ["3443", "6390"]
@@ -70,12 +66,8 @@ resource "azurerm_network_security_group" "vnet_nsg_shared" {
         {
             access = "Allow"
             description = "Allow HTTP and HTTPS connections from anywhere"
-            destination_address_prefix = null
-            destination_address_prefixes = setunion( 
-                    var.dev_addr,
-                    var.prd_addr,
-                    var.shared_addr
-            )
+            destination_address_prefix = "*"
+            destination_address_prefixes = null
             destination_application_security_group_ids = null
             destination_port_range = null
             destination_port_ranges = [ "80", "443" ]
@@ -117,7 +109,7 @@ resource "azurerm_network_security_group" "vnet_nsg_shared" {
             destination_address_prefixes = null
             destination_application_security_group_ids = null
             destination_port_range = null
-            destination_port_ranges = [ "443", "5000" ]
+            destination_port_ranges = [ "80", "443", "5000" ]
             direction = "Outbound"
             name = "o-allow-external-https-connections-${var.env}"
             priority = 100
