@@ -67,24 +67,6 @@ resource "azurerm_network_security_group" "vnet_nsg_linux" {
             source_port_ranges = null
 
         },
-        {
-            access = "Deny"
-            description = "Deny connections"
-            destination_address_prefix = "*"
-            destination_address_prefixes = null
-            destination_application_security_group_ids = null
-            destination_port_range = "*"
-            destination_port_ranges = null
-            direction = "Inbound"
-            name = "i-deny-trafic-${var.env}-linux"
-            priority = 200
-            protocol = "*"
-            source_address_prefix = "*"
-            source_address_prefixes = null
-            source_application_security_group_ids = null
-            source_port_range = "*"
-            source_port_ranges = null
-        },
 
         # Outbound
         
@@ -312,11 +294,11 @@ resource "azurerm_network_security_group" "vnet_nsg_k8s" {
         {
             access = "Allow"
             description = "Allow external access https"
-            destination_address_prefix = null
-            destination_address_prefixes = [ var.k8s_addr ]
+            destination_address_prefix = "*"
+            destination_address_prefixes = null
             destination_application_security_group_ids = null
             destination_port_range = null
-            destination_port_ranges = [ "443" ]
+            destination_port_ranges = [ "80", "443" ]
             direction = "Inbound"
             name = "i-https-trafic-${var.env}-k8s"
             priority = 110
@@ -330,8 +312,8 @@ resource "azurerm_network_security_group" "vnet_nsg_k8s" {
         {
             access = "Allow"
             description = "Allow subnet connections from subnets windows, linux and shared"
-            destination_address_prefix = null
-            destination_address_prefixes = [ var.k8s_addr ]
+            destination_address_prefix = "*"
+            destination_address_prefixes = null
             destination_application_security_group_ids = null
             destination_port_range = "*"
             destination_port_ranges = null
@@ -349,24 +331,7 @@ resource "azurerm_network_security_group" "vnet_nsg_k8s" {
             source_port_range = "*"
             source_port_ranges = null
         },
-        {
-            access = "Deny"
-            description = "Deny connections"
-            destination_address_prefix = null
-            destination_address_prefixes = [ var.windows_vm_addr ]
-            destination_application_security_group_ids = null
-            destination_port_range = "*"
-            destination_port_ranges = null
-            direction = "Inbound"
-            name = "i-subnets-network-trafic-${var.env}-k8s"
-            priority = 200
-            protocol = "*"
-            source_address_prefix = "*"
-            source_address_prefixes = null
-            source_application_security_group_ids = null
-            source_port_range = "*"
-            source_port_ranges = null
-        },
+        
 
         # Outbound
         
@@ -410,25 +375,6 @@ resource "azurerm_network_security_group" "vnet_nsg_k8s" {
             source_port_range = "*"
             source_port_ranges = null
         },
-        {
-            access = "Deny"
-            description = "Deny other connections"
-            destination_address_prefix = "*"
-            destination_address_prefixes = null
-            destination_application_security_group_ids = null
-            destination_port_range = "*"
-            destination_port_ranges = null
-            direction = "Outbound"
-            name = "o-deny-connections-${var.env}-k8s"
-            priority = 120
-            protocol = "*"
-            source_address_prefix = null
-            source_address_prefixes = [ var.windows_vm_addr ]
-            source_application_security_group_ids = null
-            source_port_range = "*"
-            source_port_ranges = null
-
-        }
         
     ]
 }
