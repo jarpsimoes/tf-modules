@@ -38,7 +38,8 @@ resource "azurerm_network_security_group" "vnet_nsg_linux" {
             source_address_prefix = null
             source_address_prefixes = [ 
                     var.linux_vm_addr,
-                    var.shared_addr
+                    var.shared_addr,
+                    var.container_apps_addr
                 ]
             source_application_security_group_ids = null
             source_port_range = "*"
@@ -95,7 +96,8 @@ resource "azurerm_network_security_group" "vnet_nsg_linux" {
             destination_address_prefixes = [ 
                 var.windows_vm_addr,
                 var.k8s_addr,
-                var.shared_addr
+                var.shared_addr,
+                var.container_apps_addr
              ]
             destination_application_security_group_ids = null
             destination_port_range = "*"
@@ -172,7 +174,8 @@ resource "azurerm_network_security_group" "vnet_nsg_windows" {
             source_address_prefix = null
             source_address_prefixes = [ 
                     var.windows_vm_addr,
-                    var.shared_addr
+                    var.shared_addr,
+                    var.container_apps_addr
                 ]
             source_application_security_group_ids = null
             source_port_range = "*"
@@ -194,7 +197,8 @@ resource "azurerm_network_security_group" "vnet_nsg_windows" {
             source_address_prefixes = [ 
                     var.linux_vm_addr,
                     var.k8s_addr,
-                    var.shared_addr 
+                    var.shared_addr,
+                    var.container_apps_addr
                 ]
             source_application_security_group_ids = null
             source_port_range = "*"
@@ -247,7 +251,8 @@ resource "azurerm_network_security_group" "vnet_nsg_windows" {
             destination_address_prefixes = [ 
                 var.linux_vm_addr,
                 var.k8s_addr,
-                var.shared_addr
+                var.shared_addr,
+                var.container_apps_addr
              ]
             destination_application_security_group_ids = null
             destination_port_range = "*"

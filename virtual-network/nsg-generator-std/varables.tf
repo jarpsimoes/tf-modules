@@ -16,6 +16,9 @@ variable "k8s_addr" {
 variable "shared_addr" {
     type = string
 }
+variable "container_apps_addr" {
+    type = string
+}
 variable "resource_group_name" {
     type = string
 }

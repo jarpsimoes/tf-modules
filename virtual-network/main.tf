@@ -7,6 +7,7 @@ module "nsg_dev" {
     k8s_addr = var.subnets.dev.k8s.addr
     shared_addr = var.subnets.shr.linux_vm.addr
     resource_group_name = var.resource_group_name
+    container_apps_addr = var.subnets.dev.container_apps.addr
     location = var.location
 }
 module "nsg_prd" {
@@ -16,6 +17,7 @@ module "nsg_prd" {
     linux_vm_addr = var.subnets.prd.linux_vm.addr
     windows_vm_addr = var.subnets.prd.windows_vm.addr
     k8s_addr = var.subnets.prd.k8s.addr
+    container_apps_addr = var.subnets.prd.container_apps.addr
     shared_addr = var.subnets.shr.linux_vm.addr
     resource_group_name = var.resource_group_name
     location = var.location
@@ -26,9 +28,9 @@ module "nsg_shared" {
     location = var.location
     env = "shr"
     resource_group_name = var.resource_group_name
-    dev_addr = [var.subnets.dev.linux_vm.addr, var.subnets.dev.windows_vm.addr, var.subnets.dev.k8s.addr]
+    dev_addr = [var.subnets.dev.linux_vm.addr, var.subnets.dev.windows_vm.addr, var.subnets.dev.k8s.addr, var.subnets.dev.container_apps.addr]
     shared_addr = [var.subnets.shr.linux_vm.addr, var.subnets.shr.windows_vm.addr]
-    prd_addr = [var.subnets.prd.linux_vm.addr, var.subnets.prd.windows_vm.addr, var.subnets.prd.k8s.addr]
+    prd_addr = [var.subnets.prd.linux_vm.addr, var.subnets.prd.windows_vm.addr, var.subnets.prd.k8s.addr, var.subnets.prd.container_apps.addr]
 }
 module "vnet_dev" {
     depends_on = [
