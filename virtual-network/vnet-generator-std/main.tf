@@ -6,7 +6,8 @@ resource "azurerm_virtual_network" "vnet" {
     address_space = [
         var.addr_linux,
         var.addr_windows,
-        var.addr_k8s
+        var.addr_k8s,
+        var.addr_container_apps
     ]
 
     subnet {
