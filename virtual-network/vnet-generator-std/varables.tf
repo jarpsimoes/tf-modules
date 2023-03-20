@@ -19,6 +19,9 @@ variable "linux_nsg_id" {
 variable "addr_windows" {
     type = string
 }
+variable "addr_container_apps" {
+    type = string
+}
 variable "windows_nsg_id" {
     type = string
 }
@@ -26,5 +29,8 @@ variable "addr_k8s" {
     type = string
 }
 variable "k8s_nsg_id" {
+    type = string
+}
+variable "container_apps_nsg_id" {
     type = string
 }

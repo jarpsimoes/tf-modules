@@ -19,6 +19,9 @@ variable "subnets" {
             k8s = object({
                 addr = string
             })
+            container_apps = object({
+                addr = string
+            })
         })
         prd = object({
             linux_vm = object({
@@ -28,6 +31,9 @@ variable "subnets" {
                 addr = string
             })
             k8s = object({
+                addr = string
+            })
+            container_apps = object({
                 addr = string
             })
         })

@@ -24,6 +24,11 @@ resource "azurerm_virtual_network" "vnet" {
         address_prefix = var.addr_k8s
         security_group = var.k8s_nsg_id
     }
+    subnet {
+        name = "${var.name}-${var.env}-container-apps-subnet"
+        address_prefix = var.addr_container_apps
+        security_group = var.container_apps_nsg_id
+    }
 
     tags = {
         environment = var.env

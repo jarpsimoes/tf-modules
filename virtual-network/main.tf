@@ -43,10 +43,12 @@ module "vnet_dev" {
     addr_linux = var.subnets.dev.linux_vm.addr
     addr_windows = var.subnets.dev.windows_vm.addr
     addr_k8s = var.subnets.dev.k8s.addr
+    addr_container_apps = var.subnets.dev.container_apps.addr
 
     linux_nsg_id = module.nsg_dev.linux_nsg.id
     windows_nsg_id = module.nsg_dev.windows_nsg.id
     k8s_nsg_id = module.nsg_dev.k8s_nsg.id
+    container_apps_nsg_id = module.nsg_dev.k8s_nsg.id
 }
 module "vnet_prd" {
     depends_on = [
@@ -61,10 +63,12 @@ module "vnet_prd" {
     addr_linux = var.subnets.prd.linux_vm.addr
     addr_windows = var.subnets.prd.windows_vm.addr
     addr_k8s = var.subnets.prd.k8s.addr
+    addr_container_apps = var.subnets.prd.container_apps.addr
 
     linux_nsg_id = module.nsg_prd.linux_nsg.id
     windows_nsg_id = module.nsg_prd.windows_nsg.id
     k8s_nsg_id = module.nsg_prd.k8s_nsg.id
+    container_apps_nsg_id = module.nsg_prd.k8s_nsg.id 
 }
 module "vnet_shr" {
     depends_on = [
