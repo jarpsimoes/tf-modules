@@ -21,36 +21,44 @@ resource "azurerm_subnet" "subnet_linux" {
     resource_group_name = var.resource_group_name
     virtual_network_name = azurerm_virtual_network.vnet.name
     address_prefixes = [ var.addr_linux ]
-    security_group = var.linux_nsg_id
 }
-
+resource "azurerm_subnet_network_security_group_association" "subnet_linux_nsg" {
+    subnet_id = azurerm_subnet.subnet_linux.id
+    network_security_group_id = var.linux_nsg_id
+}
 resource "azurerm_subnet" "subnet_windows" {
     name = "${var.name}-${var.env}-windows-subnet"
     resource_group_name = var.resource_group_name
     virtual_network_name = azurerm_virtual_network.vnet.name
     address_prefixes = [ var.addr_windows ]
-    security_group = var.windows_nsg_id
     service_endpoints = [ "Microsoft.Sql", "Microsoft.Web", "Microsoft.ContainerRegistry" ]
 }
-
+resource "azurerm_subnet_network_security_group_association" "subnet_windows_nsg" {
+    subnet_id = azurerm_subnet.subnet_windows.id
+    network_security_group_id = var.windows_nsg_id
+}
 resource "azurerm_subnet" "subnet_k8s" {
     name = "${var.name}-${var.env}-k8s-subnet"
     resource_group_name = var.resource_group_name
     virtual_network_name = azurerm_virtual_network.vnet.name
     address_prefixes = [ var.addr_k8s ]
-    security_group = var.k8s_nsg_id
     service_endpoints = [ "Microsoft.Sql", "Microsoft.Web", "Microsoft.ContainerRegistry" ]
 }
-
+resource "azurerm_subnet_network_security_group_association" "subnet_k8s_nsg" {
+    subnet_id = azurerm_subnet.subnet_k8s.id
+    network_security_group_id = var.k8s_nsg_id
+}
 resource "azurerm_subnet" "subnet_container_apps" {
     name = "${var.name}-${var.env}-container-apps-subnet"
     resource_group_name = var.resource_group_name
     virtual_network_name = azurerm_virtual_network.vnet.name
     address_prefixes = [ var.addr_container_apps ]
-    security_group = var.container_apps_nsg_id
     service_endpoints = [ "Microsoft.Sql", "Microsoft.Web", "Microsoft.ContainerRegistry" ]
 }
- 
+resource "azurerm_subnet_network_security_group_association" "subnet_container_apps_nsg" {
+    subnet_id = azurerm_subnet.subnet_container_apps.id
+    network_security_group_id = var.container_apps_nsg_id
+}
 output "vnet" {
     value = azurerm_virtual_network.vnet
 }
