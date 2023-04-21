@@ -303,7 +303,7 @@ resource "azurerm_network_security_group" "vnet_nsg_k8s" {
             destination_address_prefixes = null
             destination_application_security_group_ids = null
             destination_port_range = null
-            destination_port_ranges = [ "80", "443", "1433" ]
+            destination_port_ranges = [ "80", "443"]
             direction = "Inbound"
             name = "i-https-trafic-${var.env}-k8s"
             priority = 110
@@ -347,7 +347,7 @@ resource "azurerm_network_security_group" "vnet_nsg_k8s" {
             destination_address_prefixes = null
             destination_application_security_group_ids = null
             destination_port_range = null
-            destination_port_ranges = [ "443", "5000", "80" ]
+            destination_port_ranges = [ "443", "5000", "80", "1433" ]
             direction = "Outbound"
             name = "o-allow-external-https-connections-${var.env}-k8s"
             priority = 100
